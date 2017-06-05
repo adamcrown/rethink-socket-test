@@ -1,0 +1,12 @@
+h1 Channels
+
+ul
+  - @channels.each do |channel|
+    li = link_to channel, channel_messages_path(channel)
+
+= form_for Channel.new do |f|
+  .form-group
+    = f.label :name
+    = f.text_field :name, class: 'form-control'
+  .buttons
+    = f.submit 'Create', class: 'btn btn-default'
