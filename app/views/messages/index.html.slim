@@ -1,15 +1,19 @@
 script src="http://localhost:3001/socket.io/socket.io.js"
 javascript:
   var socket = io('http://localhost:3001');
-  socket.on('new_message', function (data) {
-    console.log('new_message', data.new_val);
-  });
+  socket.on(
+    'new_message',
+    function (data) {
+      console.log('new_message', data.new_val);
+      $('#messages').append('<li class="list-group-item">' + data.new_val.text + '</li>' )
+    }
+  );
 
 h1 = @channel
 
 .row
   .col-md-9
-    ul.list-group
+    ul#messages.list-group
       - @messages.each do |message|
         li.list-group-item = message
 
