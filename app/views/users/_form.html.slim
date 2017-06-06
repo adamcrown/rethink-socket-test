@@ -1,0 +1,11 @@
+= form_for @user do |f|
+  .form-group
+    = f.label :name
+    = f.text_field :name, class: 'form-control'
+
+  .form-group
+    = f.label :token
+    = f.text_field :token, class: 'form-control'
+  
+  .buttons
+    = f.submit 'Save', class: 'btn btn-default'

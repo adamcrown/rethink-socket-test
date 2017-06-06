@@ -1,13 +1,13 @@
-class Channel
+class User
   include NoBrainer::Document
-  include NoBrainer::Document::Timestamps
 
   has_many :messages
   has_many :memberships
-  has_many :users, through: :memberships
+  has_many :channels, through: :memberships
   field :name
+  field :token
 
   def to_s
-    name
+    name.to_s
   end
 end

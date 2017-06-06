@@ -1,0 +1,13 @@
+h1 = @user
+
+code = @user.token
+
+h2 Channel Memberships
+ul
+  - Channel.order_by(:name).each do |channel|
+    li
+      => channel
+      - if membership =  @user.memberships.where(channel: channel).first
+        = link_to 'Leave', user_membership_path(@user, membership), method: :delete, class: 'btn btn-xs btn-danger'
+      - else
+        = link_to 'Join', user_memberships_path(@user, membership: { channel_id: channel.id }), method: :create, class: 'btn btn-xs btn-success'

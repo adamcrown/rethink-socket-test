@@ -1,0 +1,22 @@
+h1 Users
+
+table.table.table-striped
+  thead
+    tr
+      th Name
+      th Token
+      th Channels
+      th Log In
+  tbody
+    - @users.each do |user|
+      tr
+        td = link_to user, user_path(user)
+        td
+          code = user.token
+        th = user.channels.to_sentence
+        td
+          => link_to 'Edit', edit_user_path(user)
+          = link_to 'Login', user_sessions_path(user), method: :post
+
+.buttons
+  = link_to 'New User', new_user_path, class: 'btn btn-default'

@@ -1,12 +1,28 @@
+script src="http://localhost:3001/socket.io/socket.io.js"
+javascript:
+  var socket = io('http://localhost:3001');
+  socket.on('new_message', function (data) {
+    console.log('new_message', data.new_val);
+  });
+
 h1 = @channel
 
-ul
-  - @messages.each do |message|
-    li = message
+.row
+  .col-md-9
+    ul.list-group
+      - @messages.each do |message|
+        li.list-group-item = message
 
-= form_for Message.new(channel: @channel), url: channel_messages_path(@channel) do |f|
-  .form-group
-    = f.label :text, 'Message'
-    = f.text_field :text, class: 'form-control'
-  .buttons
-    = f.submit 'Create', class: 'btn btn-default'
+    = form_for Message.new(channel: @channel), url: channel_messages_path(@channel) do |f|
+      .form-group
+        = f.label :text, 'Message'
+        = f.text_field :text, class: 'form-control'
+      .buttons
+        = f.submit 'Create', class: 'btn btn-default'
+
+  .col-md-3
+    h2 Members
+
+    ul.list-group
+      - @channel.users.each do |user|
+        li.list-group-item = user
